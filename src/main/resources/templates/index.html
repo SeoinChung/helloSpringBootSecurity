@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:insert="~{common :: commonHead}">
+  <title>Product Manager</title>
+</head>
+<body>
+<!-- 로그인 성공 시 보이는 사용자 맞춤 메시지 -->
+<h1 class="text-center" th:text="'환영합니다, ' + ${userEmail} + '님!'">Welcome!</h1>
+<div class="container">
+  <h1 class="mt-5">Product List</h1>
+  <!-- 사용자 조회 버튼: ROLE_ADMIN만 표시 -->
+  <a class="btn btn-primary mb-3"
+     th:href="@{/users}"
+     sec:authorize="hasRole('ROLE_ADMIN')">
+    사용자 조회
+  </a>
+
+  <!-- 상품 등록 버튼: ROLE_ADMIN만 표시 -->
+  <a class="btn btn-primary mb-3"
+     th:href="@{/products/new}"
+     sec:authorize="hasRole('ROLE_ADMIN')">
+    Create New Product
+  </a>
+
+  <table class="table table-bordered">
+    <thead>
+    <tr>
+      <th>Product ID</th>
+      <th>Name</th>
+      <th>Brand</th>
+      <th>Made In</th>
+      <th>Price</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- product 테이블에 있는 모든 값 표시 -->
+    <tr th:each="product : ${listProducts}">
+      <td th:text="${product.id}">Product ID</td>
+      <td th:text="${product.name}">Name</td>
+      <td th:text="${product.brand}">Brand</td>
+      <td th:text="${product.madeIn}">Made in</td>
+      <td th:text="${product.price}">Price</td>
+      <td>
+        <!-- 수정 버튼: ROLE_ADMIN만 표시 -->
+        <a class="btn btn-primary btn-sm"
+           th:href="@{'/products/edit/' + ${product.id}}"
+           sec:authorize="hasRole('ROLE_ADMIN')">
+          Edit
+        </a>
+        <!-- 삭제 버튼: ROLE_ADMIN만 표시 -->
+        <a class="btn btn-danger btn-sm"
+           th:href="@{'/products/delete/' + ${product.id}}"
+           sec:authorize="hasRole('ROLE_ADMIN')">
+          Delete
+        </a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <!-- 로그 아웃 버튼 누르면 login?logout 페이지로 이동 -->
+  <form th:action="@{/logout}" method="post">
+    <button type="submit" class="btn btn-danger mb-3">Log Out</button>
+  </form>
+</div>
+<!-- Bootstrap JS fragment 삽입 -->
+<div th:insert="~{common :: commonScript}"></div>
+</body>
+</html>
