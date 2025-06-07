@@ -15,33 +15,33 @@
             <div class="col-md-6">
 
                 <div class="mb-3">
+                    <!-- 상품명 입력 필드 + 유효성 검사 메시지 -->
                     <label for="productName" class="form-label">Product Name:</label>
                     <input type="text" id="productName" class="form-control" th:field="*{name}" />
                     <div class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
                 </div>
-
                 <div class="mb-3">
+                    <!-- 브랜드명 입력 필드 + 유효성 검사 메시지 -->
                     <label for="brand" class="form-label">Brand:</label>
                     <input type="text" id="brand" class="form-control" th:field="*{brand}" />
                     <div class="text-danger" th:if="${#fields.hasErrors('brand')}" th:errors="*{brand}"></div>
                 </div>
-
                 <div class="mb-3">
+                    <!-- 제조국 입력 필드 + 유효성 검사 메시지 -->
                     <label for="madeIn" class="form-label">Made In:</label>
                     <input type="text" id="madeIn" class="form-control" th:field="*{madeIn}" />
                     <div class="text-danger" th:if="${#fields.hasErrors('madeIn')}" th:errors="*{madeIn}"></div>
                 </div>
-
                 <div class="mb-3">
+                    <!-- 가격 입력 필드 + 유효성 검사 메시지 -->
                     <label for="price" class="form-label">Price:</label>
                     <input type="text" id="price" class="form-control" th:field="*{price}" />
                     <div class="text-danger" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></div>
                 </div>
-
+                <!-- 저장 버튼 -->
                 <div class="text-center">
                     <button type="submit" class="btn btn-primary">Save</button>
                 </div>
-
             </div>
         </div>
     </form>

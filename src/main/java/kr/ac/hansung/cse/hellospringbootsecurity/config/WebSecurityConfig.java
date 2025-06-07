@@ -47,9 +47,6 @@ public class WebSecurityConfig {
                         .requestMatchers(PUBLIC_MATCHERS).permitAll()
                         .requestMatchers("/", "/home", "/signup", "/login").permitAll()
 
-                        // 관리자 전용
-                        .requestMatchers("/admin/**").hasRole("ADMIN")
-
                         // 상품 조회 (모든 인증 사용자 가능)
                         .requestMatchers(HttpMethod.GET, "/products/**").hasAnyRole("USER", "ADMIN")
 
@@ -64,12 +61,12 @@ public class WebSecurityConfig {
                 .formLogin(formLogin -> formLogin
                         .loginPage("/login")
                         .defaultSuccessUrl("/products", true) // 로그인 성공 후 리다이렉트
-                        .failureUrl("/login?error")
+                        .failureUrl("/login?error") // 실패 시 url만 변경
                         .permitAll()
                 )
                 .logout(logout -> logout
                         .logoutUrl("/logout")
-                        .logoutSuccessUrl("/login?logout")
+                        .logoutSuccessUrl("/login?logout") // 로그아웃 성공 시 url
                         .permitAll()
                 )
                 .exceptionHandling(exception -> exception

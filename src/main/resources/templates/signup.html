@@ -20,24 +20,26 @@
         <div class="col-md-6">
             <h1 class="text-center mb-4">회원 가입</h1>
 
-            <!-- Form 시작 -->
             <form th:action="@{/signup}" th:object="${user}" method="post">
 
                 <!-- 이메일 중복 경고 -->
                 <div th:if="${emailExists}" class="alert alert-danger" role="alert">
                     Email already exists
                 </div>
-
+                <!-- 이메일 입력 -->
                 <div class="mb-3">
                     <label for="email" class="form-label">Your Email:</label>
                     <input type="email" class="form-control" id="email" th:field="*{email}" required />
+                    <!-- 이메일 유효성 오류 메시지 -->
+                    <div class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
                 </div>
-
+                <!-- 비밀번호 입력 -->
                 <div class="mb-3">
                     <label for="password" class="form-label">Password:</label>
                     <input type="password" class="form-control" id="password" th:field="*{password}" required />
+                    <!-- 비밀번호 유효성 오류 메시지 -->
+                    <div class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
                 </div>
-
                 <div class="d-grid">
                     <button type="submit" class="btn btn-primary btn-lg">Sign Up</button>
                 </div>

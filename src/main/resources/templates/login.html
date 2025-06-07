@@ -21,20 +21,20 @@
     <div class="col-md-6">
       <h1 class="text-center mb-4">로그인</h1>
       <form method="post" th:action="@{/login}">
+        <!-- 상단에 뜨는 메시지 -->
         <div th:if="${param.error}" class="alert alert-danger" role="alert">
           유효하지 않은 메일 또는 비밀번호입니다.
         </div>
-
         <div th:if="${param.logout}" class="alert alert-info" role="alert">
           Successfully logged out
         </div>
-        <!-- 이메일 입력 -->
+        <!-- 이메일 입력 필드 + 유효성 검사 메시지 -->
         <div class="form-floating mb-2">
           <input type="email" id="username" name="username" class="form-control" placeholder="Email" required autofocus>
           <label for="username">Email address</label>
           <div th:if="${param.error}" class="form-text text-danger">이메일이 올바르지 않거나 존재하지 않습니다.</div>
         </div>
-        <!-- 비밀번호 입력 -->
+        <!-- 비밀번호 입력 필드 + 유효성 검사 메시지 -->
         <div class="form-floating mb-3">
           <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
           <label for="password">Password</label>

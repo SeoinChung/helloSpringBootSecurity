@@ -10,17 +10,12 @@
 <h2> 안녕하세요. 스프링 부트 보안 사이트에 오신 것을 환영합니다 </h2>
 
 <div sec:authorize="isAuthenticated()">
+    <!-- principal.username: 현재 로그인한 사용자의 이름(email) -->
     <p>Welcome <span sec:authentication="principal.username">User</span></p>
-    <!-- <p><a th:href="@{/logout}">Logout</a></p>-->
+
     <form th:action="@{/logout}" method="post">
         <input type="submit" value="LogOut"/>
     </form>
-
-    <div sec:authorize="hasRole('ROLE_ADMIN')">
-        <h3>You will see this only if you are ADMIN</h3>
-        <p><a th:href="@{/admin/home}">Admin Home</a></p>
-    </div>
-
     Authenticated user roles:
     <div sec:authorize="isAuthenticated()">
         <div th:each="authority : ${#authentication.authorities}">
@@ -28,7 +23,7 @@
         </div>
     </div>
 </div>
-
+<!-- 비로그인 사용자만 볼 수 있는 영역 (첫 화면으로) -->
 <div sec:authorize="isAnonymous()">
     <p><a th:href="@{/login}">로그인 하기</a></p>
     <p><a th:href="@{/signup}">회원가입 하기</a></p>

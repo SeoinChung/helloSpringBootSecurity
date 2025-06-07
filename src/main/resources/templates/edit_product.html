@@ -19,40 +19,38 @@
           <label for="productId" class="form-label">Product ID:</label>
           <input type="text" id="productId" class="form-control" th:field="*{id}" readonly />
         </div>
-
+        <!-- 이름 입력 필드 + 유효성 검사 메시지 -->
         <div class="mb-3">
           <label for="productName" class="form-label">Product Name:</label>
           <input type="text" id="productName" class="form-control" th:field="*{name}" />
           <div class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
         </div>
-
+        <!-- 브랜드 입력 필드 + 유효성 검사 메시지 -->
         <div class="mb-3">
           <label for="brand" class="form-label">Brand:</label>
           <input type="text" id="brand" class="form-control" th:field="*{brand}" />
           <div class="text-danger" th:if="${#fields.hasErrors('brand')}" th:errors="*{brand}"></div>
         </div>
-
+        <!-- 제조국 입력 필드 + 유효성 검사 메시지 -->
         <div class="mb-3">
           <label for="madeIn" class="form-label">Made In:</label>
           <input type="text" id="madeIn" class="form-control" th:field="*{madeIn}" />
           <div class="text-danger" th:if="${#fields.hasErrors('madeIn')}" th:errors="*{madeIn}"></div>
         </div>
-
+        <!-- 가격 입력 필드 + 유효성 검사 메시지 -->
         <div class="mb-3">
           <label for="price" class="form-label">Price:</label>
           <input type="text" id="price" class="form-control" th:field="*{price}" />
           <div class="text-danger" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></div>
         </div>
-
+        <!-- 저장 버튼 -->
         <div class="text-center">
           <button type="submit" class="btn btn-primary">Save</button>
         </div>
-
       </div>
     </div>
   </form>
 </div>
-
 <!-- Bootstrap JS 로딩 -->
 <div th:insert="~{common :: commonScript}"></div>
 </body>

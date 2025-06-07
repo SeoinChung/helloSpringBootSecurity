@@ -20,9 +20,9 @@ public class ProductController {
     private ProductService service;
 
     @GetMapping({"", "/"}) // products 또는 /products/ 둘 다 매핑
-    public String viewHomePage(Model model, Principal principal) {
+    public String viewHomePage(Model model, Principal principal) { // principal은 현재 로그인한 사용자의 정보를 담고 있는 객체
         String email = principal.getName(); // 로그인한 사용자의 이메일
-        model.addAttribute("userEmail", email);
+        model.addAttribute("userEmail", email); // 모델에 주입해서 html에서 사용할 수 있도록 함
 
         List<Product> listProducts = service.listAll();
         model.addAttribute("listProducts", listProducts);
@@ -48,17 +48,18 @@ public class ProductController {
         return "edit_product";
     }
 
-    // @ModelAttribute는  Form data (예: name=Laptop&brand=Samsung&madeIn=Korea&price=1000.00)를 Product 객체
-    // @RequestBody는 HTTP 요청 본문에 포함된
     //  JSON 데이터(예: {"name": "Laptop", "brand": "Samsung", "madeIn": "Korea", "price": 1000.00})를 Product 객체에 매핑
     @PostMapping("/save")
     public String saveProduct(@Valid @ModelAttribute("product") Product product,
                               BindingResult bindingResult,
                               Model model) {
+        // 유효성 검사
         if (bindingResult.hasErrors()) {
+            // 기존 상품인 경우
             if (product.getId() != null) {
                 return "edit_product"; // 수정 페이지로
-            } else {
+            }
+            else {
                 return "new_product";  // 등록 페이지로
             }
         }

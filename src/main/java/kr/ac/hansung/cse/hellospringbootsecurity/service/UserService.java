@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
-public class UserService {
+public class UserService { // 모든 사용자 정보 갖고 오기
     @Autowired
     private UserRepository userRepository;
 
